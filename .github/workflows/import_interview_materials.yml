@@ -25,6 +25,7 @@ jobs:
         run: |
           set -euo pipefail
 
+          git rm -f --cached Autumn-Recruit-Algo-Notes || true
           rm -rf Autumn-Recruit-Algo-Notes
           rm -f .gitmodules
 
@@ -57,5 +58,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Import interview study materials into repository"
+          git commit -m "Convert imported materials to ordinary files"
           git push origin HEAD:main
