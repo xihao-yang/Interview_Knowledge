@@ -1,0 +1,61 @@
+name: Import interview study materials
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import_interview_materials.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout destination repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Import source as ordinary repository content
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf Autumn-Recruit-Algo-Notes
+          rm -f .gitmodules
+
+          git clone --depth 1 https://github.com/Akun-python/autumn-recruitment.git /tmp/autumn-recruitment
+          rm -rf /tmp/autumn-recruitment/.git
+
+          mkdir -p Autumn-Recruit-Algo-Notes
+          cp -a /tmp/autumn-recruitment/. Autumn-Recruit-Algo-Notes/
+
+          cat > README.md <<'EOF'
+          # Interview_Knowledge
+
+          Personal interview-preparation knowledge base covering algorithms, machine learning, deep learning, LLMs, computer science fundamentals, reinforcement learning, optimization, computer vision, NLP, and time series.
+
+          ## Knowledge Base
+
+          - [Interview & Algorithm Notes](Autumn-Recruit-Algo-Notes)
+
+          ## License
+
+          This repository uses the MIT License. Third-party materials included in this repository retain their applicable license notices.
+          EOF
+
+          git config user.name "Xihao Yang"
+          git config user.email "xihao.yang@keio.jp"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Import interview study materials into repository"
+          git push origin HEAD:main
