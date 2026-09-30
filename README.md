@@ -1,5 +1,11 @@
 # Interview_Knowledge
 
-## Resources
+Personal interview-preparation knowledge base covering algorithms, machine learning, deep learning, LLMs, computer science fundamentals, reinforcement learning, optimization, computer vision, NLP, and time series.
 
-- [Autumn-Recruit Algo Notes](Autumn-Recruit-Algo-Notes) — algorithm / ML / LLM / RL / CV / NLP / time-series interview notes. Upstream: [Akun-python/autumn-recruitment](https://github.com/Akun-python/autumn-recruitment).
+## Knowledge Base
+
+- [Interview & Algorithm Notes](Autumn-Recruit-Algo-Notes)
+
+## License
+
+This repository uses the MIT License. Third-party materials included in this repository retain their applicable license notices.
